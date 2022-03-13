@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+const generateTeamHTML = (team) => {
+    return `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -7,6 +8,6 @@
         <title>Document</title>
     </head>
     <body>
-        {"name":"eric"}
     </body>
-    </html>
+    </html>`
+}

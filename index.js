@@ -1,14 +1,80 @@
-var inquirer = require('inquirer');
+const inquirer = require('inquirer');
 const fs = require('fs');
-const Engineer = require('./Engineer');
-// const generatePage = require('index.html'); //what file to assign here?
+const Engineer = require('./lib/Engineer');
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
+const path = require("path");
 
-const questions = [
+const managerQuestions = [
     {
-      type: 'list',
-      name: 'employeeType',
-      message: 'What employee do you want add?',
-      choices: ['Manager', 'Engineer', 'Employee', 'Intern'],
+        type: "input",
+        name: "name",
+        message: "What is the manager's name? (Required)",
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log("Please provide the manager's name!");
+                return false;
+            }
+        }
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is the manager's ID number?",
+        validate: idInput => {
+            if (idInput) {
+                return true;
+            } else {
+                console.log("Please provide the manager's ID number!");
+                return false;
+            }
+        }
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the manager's email address?",
+        validate: email => {
+            if (email) {
+                return true;
+            } else {
+                console.log("Please provide the manager's email address!");
+                return false;
+            }
+        }
+      },
+    {
+        type: "input",
+        name: "phone",
+        message: "What is the manager's phone number?",
+        validate: phone => {
+            if (phone) {
+                return true;
+            } else {
+                console.log("Please provide the manager's phone number!");
+                return false;
+            }
+        }
+    },
+  ];
+
+  const addMember = [
+    {
+        type: "list",
+        name: "newEmployee",
+        message: "Would you like to add a new Employee?",
+        choices: ["Engineer", "Intern", "I'm Done Building the Team!"],
+        validate: newEmployee => {
+            if (newEmployee === "Engineer") {
+                engineerQuest();
+            } else if (newEmployee === "Intern") {
+                internQuest();
+            } else {
+                createHTML();
+            }
+        }
     },
   ];
 
@@ -36,14 +102,16 @@ function writeToFile(fileName, data) {
 
 function init() {
     inquirer
-      .prompt(questions)
+      .prompt(managerQuestions)
       .then((answers) => {
         console.log('answers????:', answers)
-        if (answers.employeeType === 'Engineer') {
-            const engineer = new Engineer('Noah', '1', 'noah@gmail.com', 'noahking27', 'Engineer')
-            console.log('engineer?????', engineer)
-            writeToFile('index.html', engineer)
-        } else if(answers.employeeType === 'Manager') {
+        if (answers) {
+            const manager = new Manager(answers.name)
+            console.log('engineer?????', manager)
+            inquirer
+            .prompt(employeeQuestions)
+            // writeToFile('index.html', manager)
+        } else if(answers.title === 'Manager') {
 
         }
         // writeToFile('index.html', answers)
