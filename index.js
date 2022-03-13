@@ -1,125 +1,173 @@
-const inquirer = require('inquirer');
-const fs = require('fs');
-const Engineer = require('./lib/Engineer');
+const inquirer = require("inquirer");
+const fs = require("fs");
+const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
-const path = require("path");
+const newHTML = require("./src/createHTML");
+const team = [];
 
-const managerQuestions = [
-    {
-        type: "input",
-        name: "name",
-        message: "What is the manager's name? (Required)",
-        validate: nameInput => {
-            if (nameInput) {
-                return true;
-            } else {
-                console.log("Please provide the manager's name!");
-                return false;
-            }
-        }
-      },
-      {
-        type: "input",
-        name: "id",
-        message: "What is the manager's ID number?",
-        validate: idInput => {
-            if (idInput) {
-                return true;
-            } else {
-                console.log("Please provide the manager's ID number!");
-                return false;
-            }
-        }
-      },
-      {
-        type: "input",
-        name: "email",
-        message: "What is the manager's email address?",
-        validate: email => {
-            if (email) {
-                return true;
-            } else {
-                console.log("Please provide the manager's email address!");
-                return false;
-            }
-        }
-      },
-    {
-        type: "input",
-        name: "phone",
-        message: "What is the manager's phone number?",
-        validate: phone => {
-            if (phone) {
-                return true;
-            } else {
-                console.log("Please provide the manager's phone number!");
-                return false;
-            }
-        }
+const initialQuest = [
+  {
+    type: "input",
+    name: "name",
+    message: "What is the manager's name? (Required)",
+    validate: (nameInput) => {
+      if (nameInput) {
+        return true;
+      } else {
+        console.log("Please provide the manager's name!");
+        return false;
+      }
     },
-  ];
-
-  const addMember = [
-    {
-        type: "list",
-        name: "newEmployee",
-        message: "Would you like to add a new Employee?",
-        choices: ["Engineer", "Intern", "I'm Done Building the Team!"],
-        validate: newEmployee => {
-            if (newEmployee === "Engineer") {
-                engineerQuest();
-            } else if (newEmployee === "Intern") {
-                internQuest();
-            } else {
-                createHTML();
-            }
-        }
+  },
+  {
+    type: "input",
+    name: "id",
+    message: "What is the manager's ID number?",
+    validate: (idInput) => {
+      if (idInput) {
+        return true;
+      } else {
+        console.log("Please provide the manager's ID number!");
+        return false;
+      }
     },
-  ];
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "What is the manager's email address?",
+    validate: (email) => {
+      if (email) {
+        return true;
+      } else {
+        console.log("Please provide the manager's email address!");
+        return false;
+      }
+    },
+  },
+  {
+    type: "input",
+    name: "phone",
+    message: "What is the manager's phone number?",
+    validate: (phone) => {
+      if (phone) {
+        return true;
+      } else {
+        console.log("Please provide the manager's phone number!");
+        return false;
+      }
+    },
+  },
+];
 
-function writeToFile(fileName, data) {
-    // const pageHTML = generatePage(data);
-    const html = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        ${JSON.stringify(data)}
-    </body>
-    </html>`
-    
-    fs.writeFile(fileName, html, err => {
-        if (err) throw err;
-        console.log(err);
-        console.log('Page complete! Check out index.html to see the output!');
-    });
+const newEmployee = [
+  {
+    type: "list",
+    name: "newEmployee",
+    message: "Would you like to add a new Employee?",
+    choices: ["Engineer", "Intern", "I'm Done Building the Team!"],
+    validate: (newEmployee) => {
+      if (newEmployee === "Engineer") {
+        engineerQuest();
+      } else if (newEmployee === "Intern") {
+        internQuest();
+      } else {
+        writeToFile();
+      }
+    },
+  },
+];
+
+const engineer = [
+  {
+    type: "input",
+    name: "github",
+    message: "What is your github username?",
+    validate: (github) => {
+        if (github) {
+          return true;
+        } else {
+          console.log("Please provide the engineer's Github username!");
+          return false;
+        }
+      },
+  },
+];
+
+const intern = [
+  {
+    type: "input",
+    name: "school",
+    message: "What school/university did you graduate from?",
+    validate: (school) => {
+        if (school) {
+          return true;
+        } else {
+          console.log("Please provide the intern's school/university!");
+          return false;
+        }
+      },
+  },
+];
+
+
+function writeToFile(data) {
+    let newData = newHTML(JSON.stringify(data))
+    fs.writeFile('./index.html', newData, function (error) {
+        if (error) {
+            return console.log(error);
+        } else {
+            console.log("Your index html was created!")
+        }
+    })
 }
 
 function init() {
-    inquirer
-      .prompt(managerQuestions)
-      .then((answers) => {
-        console.log('answers????:', answers)
-        if (answers) {
-            const manager = new Manager(answers.name)
-            console.log('engineer?????', manager)
-            inquirer
-            .prompt(employeeQuestions)
-            // writeToFile('index.html', manager)
-        } else if(answers.title === 'Manager') {
+  inquirer
+    .prompt(initialQuest)
+    .then((answers) => { 
+        position = new Manager(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.phone
+        )
+        team.push(position)
+        newTeam()
+    });
+}
 
+function newTeam () {
+    inquirer.prompt(newEmployee).then((data) => {
+        if (data.newEmployee === "Engineer") {
+            inquirer.prompt(engineer).then((engineerData) => {
+                engineerNew = new Engineer(
+                    engineerData.name,
+                    engineerData.id,
+                    engineerData.email,
+                    engineerData.github
+                )
+                team.push(engineerNew)
+                newTeam();
+            })
         }
-        // writeToFile('index.html', answers)
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-  }
-  
-  init();
-  
+        if (data.newEmployee === "Intern") {
+            inquirer.prompt(intern).then((internData) => {
+                internNew = new Intern(
+                    internData.name,
+                    internData.id,
+                    internData.email,
+                    internData.school
+                )
+                team.push(internNew)
+                newTeam();
+            })
+        }
+        if (data.newEmployee === "I'm Done Building the Team!") {
+            writeToFile(team)
+        }
+    })
+}  
+
+init();
