@@ -132,7 +132,7 @@ function init() {
             answers.id,
             answers.email,
             answers.phone,
-            answers.role
+            answers.ro
         )
         team.push(position)
         newTeam()
