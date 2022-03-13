@@ -112,8 +112,8 @@ const intern = [
 ];
 
 
-function writeToFile(data) {
-    let newData = newHTML(JSON.stringify(data))
+function writeToFile(answers) {
+    let newData = (JSON.stringify(answers))
     fs.writeFile('./index.html', newData, function (error) {
         if (error) {
             return console.log(error);
@@ -131,7 +131,8 @@ function init() {
             answers.name,
             answers.id,
             answers.email,
-            answers.phone
+            answers.phone,
+            answers.role
         )
         team.push(position)
         newTeam()

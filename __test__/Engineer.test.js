@@ -1,7 +1,7 @@
 const Employee = require("../lib/Employee");
-const Manager = require("../lib/Manager");
 
-describe("Manager class", () => {
+
+describe("Engineer class", () => {
     test("create an instance of an employee", () => {
         const employee = new Employee();
         expect(employee).toBeInstanceof(Employee);
