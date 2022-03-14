@@ -23,7 +23,7 @@ const initialQuest = [
   {
     type: "input",
     name: "id",
-    message: "What is the manager's ID number?",
+    message: "What is the manager's ID number? (Required)",
     validate: (idInput) => {
       if (idInput) {
         return true;
@@ -36,7 +36,7 @@ const initialQuest = [
   {
     type: "input",
     name: "email",
-    message: "What is the manager's email address?",
+    message: "What is the manager's email address? (Required)",
     validate: (email) => {
       if (email) {
         return true;
@@ -49,7 +49,7 @@ const initialQuest = [
   {
     type: "input",
     name: "phone",
-    message: "What is the manager's office number?",
+    message: "What is the manager's office number? (Required)",
     validate: (officeNum) => {
       if (officeNum) {
         return true;
@@ -80,10 +80,49 @@ const newEmployee = [
 ];
 
 const engineer = [
+    {
+        type: "input",
+        name: "name",
+        message: "What is the engineer's name? (Required)",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please provide the engineer's name!");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is the engineer's ID number? (Required)",
+        validate: (idInput) => {
+          if (idInput) {
+            return true;
+          } else {
+            console.log("Please provide the engineer's ID number!");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the engineer's email address? (Required)",
+        validate: (email) => {
+          if (email) {
+            return true;
+          } else {
+            console.log("Please provide the engineer's email address!");
+            return false;
+          }
+        },
+      },
   {
     type: "input",
     name: "github",
-    message: "What is your github username?",
+    message: "What is the engineer's github username? (Required)",
     validate: (github) => {
         if (github) {
           return true;
@@ -96,10 +135,49 @@ const engineer = [
 ];
 
 const intern = [
+    {
+        type: "input",
+        name: "name",
+        message: "What is the intern's name? (Required)",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please provide the intern's name!");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "What is the intern's ID number? (Required)",
+        validate: (idInput) => {
+          if (idInput) {
+            return true;
+          } else {
+            console.log("Please provide the intern's ID number!");
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the intern's email address? (Required)",
+        validate: (email) => {
+          if (email) {
+            return true;
+          } else {
+            console.log("Please provide the intern's email address!");
+            return false;
+          }
+        },
+      },
   {
     type: "input",
     name: "school",
-    message: "What school/university did you graduate from?",
+    message: "What school/university did the intern graduate from? (Required)",
     validate: (school) => {
         if (school) {
           return true;
@@ -132,7 +210,7 @@ function init() {
             answers.id,
             answers.email,
             answers.phone,
-            answers.ro
+            answers.role
         )
         team.push(position)
         newTeam()
