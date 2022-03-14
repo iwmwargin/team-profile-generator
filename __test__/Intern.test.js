@@ -1,15 +1,19 @@
-const Employee = require("../lib/Employee");
-const Manager = require("../lib/Manager");
+const Intern = require("../lib/Intern");
 
-describe("Manager class", () => {
-    test("create an instance of an employee", () => {
-        const employee = new Employee();
-        expect(employee).toBeInstanceof(Employee);
-    })
-    test("name property returns correct name", () => {
-        const manager = new Manager("Eric");
-        const actualManagersName = manager.name;
-        const expectedManagersName = "Eric";
-        expect(actualManagersName).toBe(expectedManagersName);
-    });
+test("Get school name via constructor", () => {
+  const school = "J&W";
+  const a = new Intern("Eric", 1, "turtle@turtle.com", school);
+  expect(a.school).toBe(school);
+});
+
+test("Get School username via getSchool()", () => {
+    const school = "J&W";
+    const a = new Intern("iwmwargin", 1, "scrim@scram.com", school);
+    expect(a.getSchool()).toBe(school);
+  });
+
+test("getRole() should return \"Intern\"", () => {
+  const intern = "Intern";
+  const a = new Intern("Eric", 1, "test@test.com", "ASU");
+  expect(a.getRole()).toBe("Intern");
 });

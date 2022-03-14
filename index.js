@@ -49,12 +49,12 @@ const initialQuest = [
   {
     type: "input",
     name: "phone",
-    message: "What is the manager's phone number?",
-    validate: (phone) => {
-      if (phone) {
+    message: "What is the manager's office number?",
+    validate: (officeNum) => {
+      if (officeNum) {
         return true;
       } else {
-        console.log("Please provide the manager's phone number!");
+        console.log("Please provide the manager's office number!");
         return false;
       }
     },
