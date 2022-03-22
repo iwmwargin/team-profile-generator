@@ -22,10 +22,15 @@ const generateTeamHTML = (team) => {
         <div class="container">
             <div class="row">
                 <div class="team-area col-12 d-flex justify-content-center">
+                
                     
                 </div>
             </div>
         </div>
         <script src="https://kit.fontawesome.com/5e53cf0bb0.js" crossorigin="anonymous"></script>
     </body>`
+}
+
+module.exports = team => {
+
 }

@@ -3,8 +3,8 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "bootstrap-icons": "^1.8.1",
     "inquirer": "^8.2.1",
     "jest": "^27.5.1"
   }
-  
 }
