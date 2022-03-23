@@ -1,10 +1,5 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-// const path = require("path");
-
-// const dist_dir = path.resolve(__dirname, "dist");
-// const dist_path = path.join(dist_dir, "index.html");
-// const render = require("./src/createHTML");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
@@ -185,7 +180,7 @@ const intern = [
   },
 ];
 
-function appendHTML(answers) {
+function appendHTML() {
   let htmlBody = "";
   const htmlHead = `<!DOCTYPE html>
   <html lang="en">
@@ -194,80 +189,93 @@ function appendHTML(answers) {
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Team Profile Generator</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   
   </head>
-  <div class="container-fluid">
-            <div class="row">
+  <body>
+  <header class="row justify-content-md-center m-2">
                 <div class="col-12 mb-3 team-heading jumbotron bg-success text-dark">
                     <h1 class="text-center"> My Team</h1>
-                </div>
             </div>
-        </div>`;
+        </header>
+        <div class="row justify-content-center">
+        <div class ="card-deck">`;
 
-  team.forEach((item, index) => {
-    if(item.officeNum) {
+  team.forEach((data, index) => {
+    if(data.officeNum) {
 
-      const managerCard = `<div class="card text-white mb-3" style="max-width: 18rem;">
-      <div class="card-body bg-primary">${item.name}
-      <h6 class="card-text>Manager</h6>
-      <i class="bi bi-robot"></i>
+      const managerCard = `<div class="card shadow-lg text-black mb-3" style="max-width: 18rem;">
+      <div class="card-body bg-primary">
+      <h5 class>${data.name}</h5>
+      <h6 class="card-text font-weight-bold"><i class="fas fa-mug-hot mr-2"></i>Manager</h6>
+      
       </div>
         <ul class="list-group list-group-flush">
-        <li class="list-group-item">${item.id}</li>
-        <a class="list-group-item" href ="mailto: ${item.email}">Email</a>
-        <li class="list-group-item">Office Number: ${item.officeNum}</li>
+        <li class="list-group-item">ID: ${data.id}</li>
+        <a class="list-group-item" href ="mailto: ${data.email}">Email: ${data.email}</a>
+        <li class="list-group-item">Office Number: ${data.officeNum}</li>
       </ul>
       </div>`
 
       htmlBody = htmlBody + managerCard
     }
 
-    if(item.github) {
-      const engCard = `<div class="card text-white mb-3" style="max-width: 18rem;">
-      <div class="card-body bg-primary">${item.name}
-      <h6 class="card-text>Engineer</h6>
-      <i class="bi bi-wrench-adjustable"></i>
+    if(data.github) {
+      const engCard = `<div class="card shadow-lg text-black mb-3" style="max-width: 18rem;">
+      <div class="card-body bg-primary">
+      <h5 class=>${data.name}</h5>
+      <h6 class="card-text font-weight-bold"><i class="fas fa-glasses mr-2 "></i>Engineer</h6>
+      
       </div>
         <ul class="list-group list-group-flush">
-        <li class="list-group-item">${item.id}</li>
-        <a class="list-group-item" href ="mailto: ${item.email}">Email</a>
-        <li class="list-group-item">Office Number: ${item.github}</li>
+        <li class="list-group-item">ID: ${data.id}</li>
+        <a class="list-group-item" href ="mailto: ${data.email}">Email: ${data.email}</a>
+        <li class="list-group-item">Github: ${data.github}</li>
       </ul>
       </div>`
 
       htmlBody = htmlBody + engCard
     }
 
-    if(item.school) {
-      const intCard = `<div class="card text-white mb-3" style="max-width: 18rem;">
-      <div class="card-body bg-primary">${item.name}
-      <h6 class="card-text>Intern</h6>
-      <i class="bi bi-mortarboard-fill"></i>
+    if(data.school) {
+      const intCard = `<div class="card shadow-lg text-black mb-3" style="max-width: 18rem;">
+      <div class="card-body bg-primary">
+      <h5 class>${data.name}</h5>
+      <h6 class="card-text font-weight-bold"><i class="fas fa-user-graduate mr-2"></i>Intern</h6>
+      
       </div>
         <ul class="list-group list-group-flush">
-        <li class="list-group-item">${item.id}</li>
-        <a class="list-group-item" href ="mailto: ${item.email}">Email</a>
-        <li class="list-group-item">Office Number: ${item.school}</li>
+        <li class="list-group-item">ID: ${data.id}</li>
+        <a class="list-group-item" href ="mailto: ${data.email}">Email: ${data.email}</a>
+        <li class="list-group-item">School: ${data.school}</li>
       </ul>
       </div>`
 
       htmlBody = htmlBody + intCard
     }
+    fs.writeFile("./index.html", htmlHead + htmlBody, function (err) {
+      if (err) {
+        return console.log(err);
+      } else {
+        console.log("Page Created!")
+      }
+    }
+    )
   })  
 }
 
-function writeToFile(answers) {
-    let newData = (JSON.stringify(answers))
-      // fs.writeFileSync(dist_path, render(newData), "utf-8")
-    fs.writeFile('./index.html', newData, function (error) {
-        if (error) {
-            return console.log(error);
-        } else {
-            console.log("Your index html was created!")
-        }
-    })
-}
+// function writeToFile(answers) {
+//     let newData = (JSON.stringify(answers))
+//       // fs.writeFileSync(dist_path, render(newData), "utf-8")
+//     fs.writeFile('./index.html', newData, function (error) {
+//         if (error) {
+//             return console.log(error);
+//         } else {
+//             console.log("Your index html was created!")
+//         }
+//     })
+// }
 
 function init() {
   inquirer
@@ -312,7 +320,7 @@ function newTeam () {
             })
         }
         if (data.newEmployee === "I'm Done Building the Team!") {
-            appendHTML(writeToFile(team))
+            appendHTML(team)
             // writeToFile(team)
         }
     })
