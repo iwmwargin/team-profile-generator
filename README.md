@@ -71,8 +71,11 @@ https://iwmwargin.github.io/team-profile-generator/
 
 Start by running node index in the terminal. Then just following the instructions and after you are done, an HTML page will be created that contains your data.
 
- ## Screenshots
-  
+ ## Screenshots and Video
+  Link to Video (Must be downloaded to view!)
+  <br>
+  <a href="https://github.com/iwmwargin/team-profile-generator/blob/main/img/team-profile-video.mp4" target="_blank">Video</a>
+
   <img src="https://github.com/iwmwargin/team-profile-generator/blob/main/img/Team.png">
 
 ## Contributors
