@@ -74,7 +74,7 @@ Start by running node index in the terminal. Then just following the instruction
  ## Screenshots and Video
   Link to Video (Must be downloaded to view!)
   <br>
-  <a href="https://github.com/iwmwargin/team-profile-generator/blob/main/img/team-profile-video.mp4" target="_blank">Video</a>
+  <a href="https://github.com/iwmwargin/team-profile-generator/raw/main/img/team-profile-video.mp4" target="_blank">Click me to download video!</a>
 
   <img src="https://github.com/iwmwargin/team-profile-generator/blob/main/img/Team.png">
 
