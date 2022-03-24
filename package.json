@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest"
   },
   "dependencies": {
     "bootstrap-icons": "^1.8.1",
