@@ -72,7 +72,7 @@ https://iwmwargin.github.io/team-profile-generator/
 Start by running node index in the terminal. Then just following the instructions and after you are done, an HTML page will be created that contains your data.
 
  ## Screenshots and Video
-  Link to Video 
+  Link to Video (The video was done before I added hyperlink functionality to github username on engineer card)
   <br>
   <a href="https://drive.google.com/drive/u/0/folders/1Er3n4Y2HdMRJ_Ohd_NkCspeYVqWeuwg6" target="_blank">Walk Through Video</a>
 
