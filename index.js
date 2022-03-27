@@ -230,7 +230,8 @@ function appendHTML() {
         <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${data.id}</li>
         <a class="list-group-item" href ="mailto: ${data.email}">Email: ${data.email}</a>
-        <li class="list-group-item">Github: ${data.github}</li>
+        <a class="list-group-item" href ="https://github.com/${data.github}">Github:  ${data.github}
+        </a>
       </ul>
       </div>`
 
